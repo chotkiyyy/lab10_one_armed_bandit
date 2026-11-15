@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гра «Однорукий бандит»</title>
+    <link rel="stylesheet" href="lab10.css">
+    <script src="lab10.js" defer></script>
+</head>
+<body>
+
+    <div class="app-wrapper">
+        <div class="setup-card" id="setup-screen">
+            <h1>Гра «Однорукий бандит»</h1>
+            <p class="subtitle">Введіть ім'я, щоб розпочати гру (3 спроби на ставку)</p>
+            <div class="input-group">
+                <input type="text" id="username-input" placeholder="Ваше ім'я..." maxlength="15">
+                <button id="start-btn">Почати гру</button>
+            </div>
+            <p class="error-msg" id="error-msg"></p>
+        </div>
+
+        <div class="game-board hidden" id="game-screen">
+            <div class="player-header">
+                <span class="player-title" id="display-name">Гравець</span>
+                <div class="header-badges">
+                    <span class="badge balance-badge" id="balance-badge">Баланс: 1000$</span>
+                    <button class="topup-btn" id="add-money-btn" title="Поповнити баланс">+1000$</button>
+                    <span class="badge" id="attempt-badge">Спроба: 0 / 3</span>
+                </div>
+            </div>
+
+            <div class="bet-panel">
+                <div class="bet-input-wrapper">
+                    <label for="bet-input">Ваша ставка ($):</label>
+                    <input type="number" id="bet-input" value="100" min="1" step="10" placeholder="Сума...">
+                </div>
+                <div class="odds-list">
+                    <span class="odd-chip">B8 <b>x1.5</b></span>
+                    <span class="odd-chip">G2 <b>x2</b></span>
+                    <span class="odd-chip">FaZe <b>x3</b></span>
+                    <span class="odd-chip">Vitality <b>x4</b></span>
+                    <span class="odd-chip jackpot-chip">NAVI <b>x5</b></span>
+                </div>
+            </div>
+
+            <div class="status-bar" id="status-text">Введіть ставку та натисніть «Крутити барабан»!</div>
+
+            <div class="slot-machine" id="slot-machine">
+                <div class="reel" id="reel-0">
+                    <div class="slot-cell" data-row="0" data-col="0">
+                        <img src="https://img-cdn.hltv.org/eventlogo/PhVPy7kXO_J_nfTng7a87h.png?ixlib=java-2.1.0&w=200&s=7a1dd4079a079fb5c5133dea996cc5f0" alt="Слот">
+                        <span class="card-info"></span>
+                    </div>
+                    <div class="slot-cell" data-row="1" data-col="0">
+                        <img src="https://img-cdn.hltv.org/eventlogo/PhVPy7kXO_J_nfTng7a87h.png?ixlib=java-2.1.0&w=200&s=7a1dd4079a079fb5c5133dea996cc5f0" alt="Слот">
+                        <span class="card-info"></span>
+                    </div>
+                    <div class="slot-cell" data-row="2" data-col="0">
+                        <img src="https://img-cdn.hltv.org/eventlogo/PhVPy7kXO_J_nfTng7a87h.png?ixlib=java-2.1.0&w=200&s=7a1dd4079a079fb5c5133dea996cc5f0" alt="Слот">
+                        <span class="card-info"></span>
+                    </div>
+                </div>
+
+                <div class="reel" id="reel-1">
+                    <div class="slot-cell" data-row="0" data-col="1">
+                        <img src="https://img-cdn.hltv.org/eventlogo/PhVPy7kXO_J_nfTng7a87h.png?ixlib=java-2.1.0&w=200&s=7a1dd4079a079fb5c5133dea996cc5f0" alt="Слот">
+                        <span class="card-info"></span>
+                    </div>
+                    <div class="slot-cell" data-row="1" data-col="1">
+                        <img src="https://img-cdn.hltv.org/eventlogo/PhVPy7kXO_J_nfTng7a87h.png?ixlib=java-2.1.0&w=200&s=7a1dd4079a079fb5c5133dea996cc5f0" alt="Слот">
+                        <span class="card-info"></span>
+                    </div>
+                    <div class="slot-cell" data-row="2" data-col="1">
+                        <img src="https://img-cdn.hltv.org/eventlogo/PhVPy7kXO_J_nfTng7a87h.png?ixlib=java-2.1.0&w=200&s=7a1dd4079a079fb5c5133dea996cc5f0" alt="Слот">
+                        <span class="card-info"></span>
+                    </div>
+                </div>
+
+                <div class="reel" id="reel-2">
+                    <div class="slot-cell" data-row="0" data-col="2">
+                        <img src="https://img-cdn.hltv.org/eventlogo/PhVPy7kXO_J_nfTng7a87h.png?ixlib=java-2.1.0&w=200&s=7a1dd4079a079fb5c5133dea996cc5f0" alt="Слот">
+                        <span class="card-info"></span>
+                    </div>
+                    <div class="slot-cell" data-row="1" data-col="2">
+                        <img src="https://img-cdn.hltv.org/eventlogo/PhVPy7kXO_J_nfTng7a87h.png?ixlib=java-2.1.0&w=200&s=7a1dd4079a079fb5c5133dea996cc5f0" alt="Слот">
+                        <span class="card-info"></span>
+                    </div>
+                    <div class="slot-cell" data-row="2" data-col="2">
+                        <img src="https://img-cdn.hltv.org/eventlogo/PhVPy7kXO_J_nfTng7a87h.png?ixlib=java-2.1.0&w=200&s=7a1dd4079a079fb5c5133dea996cc5f0" alt="Слот">
+                        <span class="card-info"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-panel">
+                <button class="main-btn" id="spin-btn">Крутити барабан</button>
+            </div>
+            <button class="change-btn" id="chng-btn">Змінити ім'я</button>
+        </div>
+    </div>
+
+</body>
+</html>
